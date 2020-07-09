@@ -13,6 +13,8 @@ connect()
   .on('error', console.log)
   .once('open', listen)
 
+app.use('/posts', require('./routes/posts'));
+
 app.get('*', (req, res) => {
   res.end(req.originalUrl);
 })
