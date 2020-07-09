@@ -24,6 +24,13 @@ postSchema.options.toJSON.transform = (doc, ret) => {
   return obj;
 };
 
+commentSchema.set('toJSON', { getters: true });
+commentSchema.options.toJSON.transform = (doc, ret) => {
+    const obj = { ...ret };
+    delete obj._id;
+    return obj;
+  }
+
 postSchema.methods.addComment = function (author, body) {
   this.comments.push({ author, body });
   return this.save();
