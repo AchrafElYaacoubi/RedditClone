@@ -14,6 +14,7 @@ connect()
   .once('open', listen)
 
 app.use('/posts', require('./routes/posts'));
+app.use('/users', require('./routes/users'));
 
 app.get('*', (req, res) => {
   res.end(req.originalUrl);
