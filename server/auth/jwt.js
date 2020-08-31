@@ -13,10 +13,4 @@ const jwtStrategy = new JwtStrategy(opts, function(jwt_payload, done) {
   done(false, jwt_payload)
 })
 
-const jwtAuth = passport.authenticate('jwt',
-  { 
-    session: false,
-  }
-)
-
-module.exports = { jwtStrategy, jwtAuth };
+module.exports = { jwtStrategy };

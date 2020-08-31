@@ -3,8 +3,9 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const config = require('./config');
 const passport = require('passport');
-const { localStrategy, localAuth } = require('./auth/local');
-const { jwtStrategy, jwtAuth } = require('./auth/jwt');
+const { localStrategy } = require('./auth/local');
+const { jwtStrategy } = require('./auth/jwt');
+const auth = require('./auth');
 
 
 
@@ -19,14 +20,14 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 // Implementing the strategie on a specific route
-app.use("/login", localAuth, require('./routes/auth'))
+app.use("/login", auth.local, require('./routes/auth'))
 
 
 connect()
   .on('error', console.log)
   .once('open', listen)
 
-app.use('/posts', jwtAuth, require('./routes/posts'));
+app.use('/posts', auth.jwt, require('./routes/posts'));
 app.use('/users', require('./routes/users'));
 
 app.get('*', (req, res) => {

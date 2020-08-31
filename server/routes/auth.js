@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { localAuth } = require('../auth/local');
-const jwt = require("jsonwebtoken");
-const config = require("../config");
+const { createToken } = require("../auth");
+
 
 router.post("/", (req, res, next) => {
-  const token = jwt.sign({ user: req.user }, config.jwt.secret, { expiresIn: config.jwt.expiry})
+  const token = createToken(req.user)
   return res.status(201).json(token)
 })
 
