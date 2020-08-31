@@ -35,8 +35,6 @@ userSchema.options.toJSON.transform = (doc, ret) => {
 }
 
 
-
-
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
